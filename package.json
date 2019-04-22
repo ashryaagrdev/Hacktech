@@ -1,0 +1,30 @@
+{
+  "name": "tinder",
+  "version": "1.0.0",
+  "description": "small scale version of web based tinder for campus",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "env-cmd ./config/dev.env nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashryaagr/tinder.git"
+  },
+  "author": "Ashrya Agrawal",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ashryaagr/tinder/issues"
+  },
+  "homepage": "https://github.com/ashryaagr/tinder#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.2.3",
+    "mongoose": "^5.5.2"
+  },
+  "devDependencies": {
+    "env-cmd": "^8.0.2",
+    "nodemon": "^1.18.11"
+  }
+}
