@@ -1,5 +1,4 @@
-# Tinder
-- This project is intended to be a small scale web based version of tinder .
+# EShopping Collab
 - The frameworks and tools I will be using :
     - NodeJS
     - MongoDB
@@ -25,6 +24,6 @@
     ```bash
     npm install
     ```   
- - The frontend of the app is going to be basic with less design and styling .
- - I could not find any other good and meaningful project that is not done yet....
-   so picked up this project .
+ - The backend will be integrated with an Android app that i will be making 
+   as a part of separate project/repository. 
+ - There are chances that i may make a progressive web app for this in the future. 

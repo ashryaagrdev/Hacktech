@@ -2,10 +2,10 @@
   "name": "tinder",
   "version": "1.0.0",
   "description": "small scale version of web based tinder for campus",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "env-cmd ./config/dev.env nodemon src/index.js"
+    "start": "node src/app.js",
+    "dev": "env-cmd ./config/dev.env nodemon src/app.js"
   },
   "repository": {
     "type": "git",
@@ -18,10 +18,14 @@
   },
   "homepage": "https://github.com/ashryaagr/tinder#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.2.3",
-    "mongoose": "^5.5.2"
+    "mongoose": "^5.5.2",
+    "passport-jwt": "^4.0.0",
+    "require": "^2.4.20",
+    "validator": "^10.11.0"
   },
   "devDependencies": {
     "env-cmd": "^8.0.2",
