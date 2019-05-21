@@ -13,6 +13,11 @@ const itemSchema = mongoose.Schema({
             }
         }
     },
+    company: {
+        type: String,
+        required: true,
+        lowercase: true
+    },
     owner: {
         type: ObjectID,
         required: true,

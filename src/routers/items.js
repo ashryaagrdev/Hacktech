@@ -1,16 +1,19 @@
 const express = require('express') ;
 const router = new express.Router() ;
-const {passport} = require('authentication') ;
+const passport = require('../passport') ;
 
-router.post('/item', apassport.authenticate('jwt', { session: false }), async (req, res)=>{
-
-}) ;
-
-router.patch('/item', passport.authenticate('jwt', { session: false }), async (req, res)=>{
+router.post('/item', passport.authenticate('cookie', { session:false }),
+    async (req , res)=>{
 
 }) ;
 
-router.delete('/item', passport.authenticate('jwt', { session: false }), async (req, res)=>{
+router.patch('/item', passport.authenticate('cookie', { session:false }),
+    async (req , res)=>{
+
+}) ;
+
+router.delete('/item', passport.authenticate('cookie', { session:false }),
+    async (req , res)=>{
 
 }) ;
 
