@@ -1,19 +1,36 @@
 const express = require('express') ;
 const router = new express.Router() ;
 const passport = require('../passport') ;
+const Item = require('../models/item') ;
 
-router.post('/item', passport.authenticate('cookie', { session:false }),
-    async (req , res)=>{
-
+router.get('/item/:id/', passport.authenticate('jwt', { session:false}),
+    async (req, res)=>{
+        const item = Item.findById(id) ;
+            res.send(item) ;
 }) ;
 
-router.patch('/item', passport.authenticate('cookie', { session:false }),
+router.post('/item', passport.authenticate('jwt', { session:false }),
     async (req , res)=>{
-
+        const item = Item(req.body) ;
+        try {
+            await item.save()
+        }catch (e) {
+            res.status(400).send(e)
+        }
 }) ;
 
-router.delete('/item', passport.authenticate('cookie', { session:false }),
+router.patch('/item/:id/', passport.authenticate('jwt', { session:false }),
     async (req , res)=>{
+        Item._findOneAndUpdate({ObjectId:id}, req.body)
+}) ;
+
+router.delete('/item/:id/', passport.authenticate('jwt', { session:false }),
+    async (req , res)=>{
+    try {
+        await Item.delete(id)
+    }catch (e) {
+        res.status(500).send(e)
+    }
 
 }) ;
 
