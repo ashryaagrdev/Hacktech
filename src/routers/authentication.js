@@ -12,11 +12,9 @@ router.post('/login', passport.authenticate('login', {}), async (req, res)=>{
 
 router.get('/logout', passport.authenticate('jwt', {}), async (req, res)=>{
     try {
-        req.user.tokens = req.user.tokens.filter((token) => {
-            return token.token !== req.token
-        }) ;
+        req.user.tokens = req.user.tokens.filter((token) => !req.headers.authorization.includes(token.token)) ;
+        // TODO: change above line in app version
         await req.user.save() ;
-
         res.send()
     } catch (e) {
         res.status(500).send() ;

@@ -3,12 +3,13 @@ const mongoose = require('mongoose');
 const itemSchema = mongoose.Schema({
     name : {
         type: String,
+        default: "N.A."
     },
     price : {
         type: Number,
         required: true,
         validate(value) {
-            if (value<0){
+            if (value<1){
                 throw new Error("The price of the item cant be less than 1 Rs")
             }
         }
