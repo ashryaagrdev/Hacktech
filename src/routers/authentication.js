@@ -4,21 +4,35 @@ const User = require('../models/user') ;
 
 const router = new express.Router() ;
 
-router.post('/login', passport.authenticate('local-login', {}), async (req, res)=>{
-
+router.post('/login', passport.authenticate('login', {}), async (req, res)=>{
+        const token = await req.user.generateAuthToken() ;
+        const user = req.user ;
+        res.send({ user, token}) ;
 });
 
 router.get('/logout', passport.authenticate('jwt', {}), async (req, res)=>{
+    try {
+        req.user.tokens = req.user.tokens.filter((token) => {
+            return token.token !== req.token
+        }) ;
+        await req.user.save() ;
 
+        res.send()
+    } catch (e) {
+        res.status(500).send() ;
+    }
 }) ;
 
 router.post('/user', async (req, res)=>{
+    if (req.body.phone && req.body.phone.length!==10)
+        return res.status(400).send("Please enter a valid phone number") ;
+    // I did a sanity check here to avoid sanity check while entering data into database
     const user = new User(req.body) ;
-    try {
-        await user.save()
-    } catch(e) {
-        res.status(400).send(e)
-    }
+        user.save().then((user)=>{
+            res.status(200).send({user})
+        }).catch((err)=>{
+            res.status(400).send(err)
+        }) ;
 }) ;
 
 router.patch('/user', passport.authenticate('jwt', { session:false }),
@@ -32,7 +46,7 @@ router.patch('/user', passport.authenticate('jwt', { session:false }),
         }
 
         try {
-            updates.forEach((update) => req.user[update] = req.body[update])
+            updates.forEach((update) => req.user[update] = req.body[update]) ;
             await req.user.save() ;
             res.send(req.user)
         } catch (e) {

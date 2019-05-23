@@ -1,7 +1,7 @@
 {
-  "name": "tinder",
+  "name": "eshopping_collab",
   "version": "1.0.0",
-  "description": "small scale version of web based tinder for campus",
+  "description": "E Shopping Collaboration for delivariess",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ashryaagr/tinder.git"
+    "url": "git+https://github.com/ashryaagr/eshopping_collab.git"
   },
   "author": "Ashrya Agrawal",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ashryaagr/tinder/issues"
+    "url": "https://github.com/ashryaagr/eshopping_collab/issues"
   },
-  "homepage": "https://github.com/ashryaagr/tinder#readme",
+  "homepage": "https://github.com/ashryaagr/eshopping_collab#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",

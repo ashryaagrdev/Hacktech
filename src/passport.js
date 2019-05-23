@@ -2,6 +2,7 @@ const passport = require('passport') ;
 const CookieStrategy = require('passport-cookie').Strategy ;
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('./models/user') ;
+const bcrypt = require('bcryptjs')
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
@@ -20,7 +21,7 @@ passport.use('login', new LocalStrategy(
       if (!user) {
         return done(null, false, { message: 'Incorrect username.' });
       }
-      if (!user.validPassword(password)) {
+      if (!bcrypt.compare(password, user.password)) {
         return done(null, false, { message: 'Incorrect password.' });
       }
       return done(null, user);

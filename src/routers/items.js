@@ -12,11 +12,13 @@ router.get('/item/:id/', passport.authenticate('jwt', { session:false}),
 router.post('/item', passport.authenticate('jwt', { session:false }),
     async (req , res)=>{
         const item = Item(req.body) ;
-        try {
-            await item.save()
-        }catch (e) {
-            res.status(400).send(e)
-        }
+        item.owner = req.user.id ;
+		await item.save().then((item)=>{
+			res.status(200).send({item})
+		}).catch((e)=>{
+			res.status(400).send(e) ;
+		}) ;
+
 }) ;
 
 router.patch('/item/:id/', passport.authenticate('jwt', { session:false }),

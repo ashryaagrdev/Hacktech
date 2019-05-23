@@ -19,9 +19,9 @@ const itemSchema = mongoose.Schema({
         lowercase: true
     },
     owner: {
-        type: ObjectID,
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: user,
+        ref: 'user',
     }
 }, {
     timestamps: true
