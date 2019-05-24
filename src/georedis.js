@@ -3,4 +3,7 @@ const redis = require('redis'),
 
 var geo = require('georedis').initialize(client) ;
 
+
+// Npm package used : https://www.npmjs.com/package/georedis
+
 module.exports = geo ;

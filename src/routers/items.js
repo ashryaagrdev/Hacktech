@@ -42,19 +42,19 @@ router.patch('/item/:id/', passport.authenticate('jwt', { session:false }),
 
 router.delete('/item/:id/', passport.authenticate('jwt', { session:false }),
     async (req , res)=>{
-    try {
-        const item = await Item.findOneAndDelete({ _id: req.params.id, owner: req.user._id }) ;
+		try {
+			const item = await Item.findOneAndDelete({ _id: req.params.id, owner: req.user._id }) ;
 
-        if (!item) {
-            res.status(404).send()
-        }
-		item.owner.total_price -= item.price ;
-        await item.owner.save() ; // TODO: This line needs to be tested for bugs
+			if (!item) {
+				res.status(404).send()
+			}
+			item.owner.total_price -= item.price ;
+			await item.owner.save() ; // TODO: This line needs to be tested for bugs
 
-        res.send(item)
-    } catch (e) {
-        res.status(500).send()
-    }
+			res.send(item)
+		}catch (e) {
+			res.status(500).send()
+		}
 
 }) ;
 
