@@ -19,6 +19,7 @@ router.post('/item', passport.authenticate('jwt', { session:false }),
     async (req , res)=>{
         const item = Item(req.body) ;
         item.owner = req.user.id ;
+        item.owner.total_price += item.price ;
 		await item.save().then((item)=>{
 			res.status(200).send({item})
 		}).catch((e)=>{
@@ -47,6 +48,8 @@ router.delete('/item/:id/', passport.authenticate('jwt', { session:false }),
         if (!item) {
             res.status(404).send()
         }
+		item.owner.total_price -= item.price ;
+        await item.owner.save() ; // TODO: This line needs to be tested for bugs
 
         res.send(item)
     } catch (e) {

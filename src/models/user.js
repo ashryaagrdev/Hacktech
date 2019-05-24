@@ -3,6 +3,8 @@ const passportLocalMongoose = require('passport-local-mongoose');
 const validator = require('validator') ;
 const bcrypt = require('bcryptjs') ;
 const jwt = require('jsonwebtoken') ;
+const geo = require('../georedis') ;
+const Item = require('./item') ;
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -22,7 +24,6 @@ const userSchema = new mongoose.Schema({
     },
     location: {
         type: String,
-        default: ""
     },
     email: {
         type: String,
@@ -46,7 +47,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "India"
     },
-
+    total_price:{
+        type: Number,
+        default: 0
+    },
     tokens: [{
         token: {
             type: String,
@@ -68,6 +72,14 @@ userSchema.pre('save', async function (next) {
                                             true, true, true]) ;
     if (user.isModified('password')) {
         user.password = await bcrypt.hash(user.password, 8)
+    }
+
+    if (user.isModified('location')){
+        if (geo.location(user._id)){
+            geo.updateLocation(user._id, user.location) ;
+        }else {
+            geo.addLocation(user._id, user.location) ;
+        }
     }
 
     next()
@@ -95,8 +107,13 @@ userSchema.methods.generateAuthToken = async function () {
 
 // Delete user tasks when user is removed
 userSchema.pre('remove', async function (next) {
-    const user = this
-    await Task.deleteMany({ owner: user._id })
+    const user = this ;
+
+    geo.removeLocation(user._id, function(err, reply){
+    if(err) console.error(err);
+    });
+
+    await Item.deleteMany({ owner: user._id }) ;
     next()
 }) ;
 
