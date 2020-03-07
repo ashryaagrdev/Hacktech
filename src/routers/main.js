@@ -10,7 +10,7 @@ router.post('', passport.authenticate('jwt', { session:false}), (req, res)=>{
 router.post('/nearby/', passport.authenticate('jwt', { session:false}), (req, res)=>{
 	// Can think of moving this to model as User.statistics
 	User.find({
-		_id: { $ne : req.user._id},
+		_id: { $ne : req.user._id}, // $ne stands for not equals
 		location: {
 			$near: {
 				$geometry: {

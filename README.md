@@ -4,8 +4,8 @@
     - MongoDB
     - MongoDB atlas
     - Robo3t
-    - Webstorm
-    - Heroku ( for deployment )
+    - Ebay developer tools
+    - Google Cloud Platform ( for deployment )
     - REST API and Express
     - Postman ( testing of API endpoints)
  - I have worked with these individually for small taks while follwoing tutorials
@@ -24,6 +24,3 @@
     ```bash
     npm install
     ```   
- - The backend will be integrated with an Android app that i will be making 
-   as a part of separate project/repository. 
- - There are chances that i may make a progressive web app for this in the future. 

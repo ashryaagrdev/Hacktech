@@ -4,18 +4,32 @@ const User = require('../models/user') ;
 
 const router = new express.Router() ;
 
-router.post('/login', passport.authenticate('login', {}), async (req, res)=>{
-	const token = await req.user.generateAuthToken() ;
-	const user = req.user ;
-	res.send({ user, token}) ;
+router.post('/login', async (req, res)=>{
+
+	User.findOne({ username: req.body.username }, async function(err, user) {
+		if (err) {
+			return res.status(500).send();
+		}
+		if (!user) {
+			return res.status(400).send("No such username");
+		}
+		const match = await bcrypt.compare(req.body.password, user.password);
+		if (!match) {
+			return res.status(400).send("Incorrect username") ;
+		}
+		const token = await user.generateAuthToken() ;
+		res.cookie('jwt', token) ;
+		res.redirect('/add_friend') ;
+	}) ;
 });
 
-router.get('/logout', passport.authenticate('jwt', {}), async (req, res)=>{
+
+router.get('/logout', passport.authenticate('cookie', {}), (req, res)=>{
 	try {
-		req.user.tokens = req.user.tokens.filter((token) => !req.headers.authorization.includes(token.token)) ;
-		// TODO: change above line in app version
-		await req.user.save() ;
-		res.send()
+		req.user.tokens = req.user.tokens.filter((token) => token.token!==req.cookies.jwt) ;
+		req.user.save() ;
+		res.clearCookie('jwt') ;
+		res.redirect('/login')
 	} catch (e) {
 		res.status(500).send() ;
 	}
@@ -33,10 +47,11 @@ router.post('/user', async (req, res)=>{
 	}) ;
 }) ;
 
+
 router.patch('/user', passport.authenticate('jwt', { session:false }),
 	async (req , res)=>{
 		const updates = Object.keys(req.body) ;
-		const allowedUpdates = ['username', 'email', 'password', 'name', 'location', 'phone', 'address'] ;
+		const allowedUpdates = ['username', 'email', 'password', 'name'] ;
 		const isValidOperation = updates.every((update) => allowedUpdates.includes(update)) ;
 
 		if (!isValidOperation) {
