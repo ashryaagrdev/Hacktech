@@ -6,10 +6,10 @@ $("#submit").click(function (event) {
 		username: $("#username").val(),
 		password: $("#password").val(),
 		name: $("#name").val(),
-		stack: $("#stack").val(),
-		reddit : $("#reddit").val(),
-		twitter : $("#twitter").val(),
-		youtube : $("youtube").val()
+		location: $("#location").val(),
+		email: $("#email").val(),
+		phone: $("#phone").val(),
+		address: $("#address").val(),
 	};
 	$.ajax({
 		url: "/user",
