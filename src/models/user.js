@@ -103,27 +103,22 @@ userSchema.methods.generateAuthToken = async function () {
 	return token
 } ;
 
-const scopes = ['https://api.ebay.com/oauth/api_scope',
-    'https://api.ebay.com/oauth/api_scope/sell.marketing.readonly',
-    'https://api.ebay.com/oauth/api_scope/sell.marketing',
-    'https://api.ebay.com/oauth/api_scope/sell.inventory.readonly',
-    'https://api.ebay.com/oauth/api_scope/sell.inventory',
-    'https://api.ebay.com/oauth/api_scope/sell.account.readonly',
-    'https://api.ebay.com/oauth/api_scope/sell.account',
-    'https://api.ebay.com/oauth/api_scope/sell.fulfillment.readonly',
-    'https://api.ebay.com/oauth/api_scope/sell.fulfillment'
-];
-
+const scopes = require('../routers/ebay/scopes');
 userSchema.methods.refreshAccessToken = async function(){
 	const user = this ;
-	ebayAuthToken.getAccessToken('PRODUCTION', user.refresh_token, scopes).then((data) => {
+	ebayAuthToken.getAccessToken(process.env.env, user.refresh_token, scopes).then((data) => {
 		console.log(data);
 	}).catch((error) => {
 		console.log(`Error to get Access token from refresh token:${JSON.stringify(error)}`);
 	});
 };
 
-// Delete user tasks when user is removed
+userSchema.methods.getPrice = async function(){
+	const user = this;
+
+};
+
+// Delete user items when user is removed
 userSchema.pre('remove', async function (next) {
 	const user = this ;
 
