@@ -40,7 +40,7 @@ router.get('/ebay/callback', passport.authenticate('cookie', {}), (req, res)=>{
 		console.log(`Error to get Access token :${JSON.stringify(error)}`);
 	});
 
-	res.send("Welcome");
+	res.redirect('/matching');
 
 });
 

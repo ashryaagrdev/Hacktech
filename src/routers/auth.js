@@ -19,7 +19,8 @@ router.post('/login', async (req, res)=>{
 		}
 		const token = await user.generateAuthToken() ;
 		res.cookie('jwt', token) ;
-		res.redirect('/') ;
+		res.status(200).send()
+		// res.redirect('/ebay') ;
 	}) ;
 });
 
@@ -36,13 +37,11 @@ router.get('/logout', passport.authenticate('cookie', {}), (req, res)=>{
 }) ;
 
 router.post('/user', async (req, res)=>{
-	if (req.body.phone && req.body.phone.length!==10)
-		return res.status(400).send("Please enter a valid phone number") ;
-	// I did a sanity check here to avoid sanity check while entering data into database
 	const user = new User(req.body) ;
 	user.save().then((user)=>{
 		res.status(200).send({user})
 	}).catch((err)=>{
+		console.log(err)
 		res.status(400).send(err)
 	}) ;
 }) ;

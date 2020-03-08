@@ -22,7 +22,7 @@
                     <ul class="nav navbar-nav pull-right">
                       <li class="active"><a href="#">MATCHES</a></li>
                       <li><a href="/">ABOUT</a></li>
-                      <li><a href="#">LOGOUT</a></li>
+                      <li><a href="/logout">LOGOUT</a></li>
                     </ul>
                   </div><!--/.nav-collapse -->
                 </div>
@@ -52,16 +52,16 @@
             <% matches.forEach((match, index)=>{%>
             <div class="row">
                 <div class="cell" data-title="Name">
-                    Joseph Smith
+                    <%=match.name%>>
                 </div>
-                <div class="cell" data-title="Age">
-                    27
+                <div class="cell" data-title="Phone">
+                    <%=match.phone%>
                 </div>
-                <div class="cell" data-title="Occupation">
-                    Project Manager
+                <div class="cell" data-title="Address">
+                    <%=match.address%>>
                 </div>
                 <div class="cell" data-title="Location">
-                    Somerville, MA
+                    <%=match.total_price%>>
                 </div>
             </div>
             <% }) ;%>
