@@ -42,3 +42,6 @@ app.use(item_router) ;
 app.use(main_router) ;
 
 module.exports = app;
+
+//MONGODB_URL=mongodb://127.0.0.1:27017/eshopping_collab
+//mongodb+srv://ashryaagr:Qwerty12345@cluster0-dx7jb.mongodb.net/test?retryWrites=true&w=majority

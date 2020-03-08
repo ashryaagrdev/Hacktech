@@ -12,7 +12,7 @@ $("#submit").click(function (event) {
 		data: body,
 		success: function(){
 			alert("Successfuly logged in")
-			window.location.href = window.location.origin + "/welcome"
+			window.location.href = window.location.origin + "/ebay"
 		},
 		error : function (err) {
 			alert("Invalid credentials")

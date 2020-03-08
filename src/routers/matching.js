@@ -2,25 +2,26 @@ const express = require('express') ;
 const router = new express.Router() ;
 const passport = require('../passport') ;
 const User = require('../models/user') ;
-const request = require('request');
 
-//Mocking shooping cart API data
+//Mocking shopping cart API data
 router.post('/randomCart', (req, res)=>{
 	const price = Math.floor((Math.random() * 300) + 200);
 	res.send({price}) ;
 }) ;
 
-//TODO: Need to write matching logic here
+const getOrderValue = ()=> Math.floor((Math.random() * 300) + 200);
+
+//TODO: Need to correct matching logic here
 router.get('/matching', passport.authenticate('cookie', {}), (req, res)=>{
-	 request('/randomCart', {}, (value)=>{
-		req.user.price = value;
-		req.user.save();
-	});
+
+	req.user.total_price = getOrderValue();
+	console.log(req.user.total_price);
+	req.user.save().catch(err=>console.log(err));
 	var matches = [{
 		name: 'ASHRYA',
 		phone: '1234567890',
 		address: 'afff',
-		price: 100
+		total_price: 100
 	}]; // Just some test data for default case
 	User.find({
 		_id: { $ne : req.user._id}, // $ne stands for not equals
@@ -28,7 +29,7 @@ router.get('/matching', passport.authenticate('cookie', {}), (req, res)=>{
 			$near: {
 				$geometry: {
 					coordinates: req.user.location,
-					$maxDistance: -1, // Conversion from Km to m and setting max limit
+					$maxDistance: 5*1000, // Conversion from Km to m and setting max limit
 				},
 
 			}
