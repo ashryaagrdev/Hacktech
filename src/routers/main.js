@@ -26,6 +26,11 @@ router.get('/matching', (req, res)=>{
 	}) ;
 }) ;
 
+router.post('/random', (req, res)=>{
+	price = Math.floor((Math.random() * 300) + 200);
+	res.send({price}) ;
+}) ;
+
 router.post('', passport.authenticate('jwt', { session:false}), (req, res)=>{
 	res.send({ message : "<h1>Welcome to the backend service of my app :)</h1>" }) ;
 }) ;
