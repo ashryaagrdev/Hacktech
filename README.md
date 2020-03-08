@@ -8,9 +8,7 @@
     - Google Cloud Platform ( for deployment )
     - REST API and Express
     - Postman ( testing of API endpoints)
- - I have worked with these individually for small taks while follwoing tutorials
-    , but  I wanted to get something tangible. This web app serves this purpose .
- - To run this app in development mode :
+    - To run this app in development mode :
  ```bash
  npm run dev
  ```

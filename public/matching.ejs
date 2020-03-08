@@ -45,23 +45,26 @@
                     ADDRESS
                 </div>
                 <div class="cell">
-                    ORDER
+                    ORDER VALUE
                 </div>
             </div>
 
             <% matches.forEach((match, index)=>{%>
             <div class="row">
                 <div class="cell" data-title="Name">
-                    <%=match.name%>>
+                    <%=index+1%>
+                </div>
+                <div class="cell" data-title="Name">
+                    <%=match.name%>
                 </div>
                 <div class="cell" data-title="Phone">
                     <%=match.phone%>
                 </div>
                 <div class="cell" data-title="Address">
-                    <%=match.address%>>
+                    <%=match.address%>
                 </div>
                 <div class="cell" data-title="Location">
-                    <%=match.total_price%>>
+                    <%=match.total_price%>
                 </div>
             </div>
             <% }) ;%>
