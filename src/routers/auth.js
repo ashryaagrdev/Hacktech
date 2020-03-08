@@ -1,11 +1,11 @@
 const express = require('express') ;
 const passport = require('../passport') ;
 const User = require('../models/user') ;
+const bcrypt = require('bcryptjs');
 
 const router = new express.Router() ;
 
 router.post('/login', async (req, res)=>{
-
 	User.findOne({ username: req.body.username }, async function(err, user) {
 		if (err) {
 			return res.status(500).send();
@@ -19,7 +19,7 @@ router.post('/login', async (req, res)=>{
 		}
 		const token = await user.generateAuthToken() ;
 		res.cookie('jwt', token) ;
-		res.redirect('/add_friend') ;
+		res.redirect('/welcome') ;
 	}) ;
 });
 

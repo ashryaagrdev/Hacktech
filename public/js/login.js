@@ -12,9 +12,9 @@ $("#submit").click(function (event) {
 		data: body,
 		success: function(){
 			alert("Successfuly logged in")
-			window.location.href = window.location.origin + "/add_friend"
+			window.location.href = window.location.origin + "/welcome"
 		},
-		error : function () {
+		error : function (err) {
 			alert("Invalid credentials")
 			document.getElementById("submit").disabled = false ;
 			$("#submit").val("Submit")

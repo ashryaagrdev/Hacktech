@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        minlength: 8,
+        // minlength: 8,
     },
 	location: {
 		type: [Number],
@@ -31,11 +31,11 @@ const userSchema = new mongoose.Schema({
         trim: true,
         unique: true,
         required: true,
-        validate(value) {
+/*        validate(value) {
             if (!validator.isEmail(value)) {
                 throw new Error('Email is invalid')
             }
-        }
+        }*/
     },
 	access_token: {
     	type: String,

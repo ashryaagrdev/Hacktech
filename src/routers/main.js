@@ -3,6 +3,10 @@ const router = new express.Router() ;
 const passport = require('../passport') ;
 const User = require('../models/user') ;
 
+router.get('/welcome', (req, res)=>{
+	res.send('Welcome!! Authentication worked fine!!')
+});
+
 router.get('/', (req, res)=>{
 	res.render('register') ;
 }) ;
