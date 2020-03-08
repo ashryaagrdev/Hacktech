@@ -19,7 +19,7 @@ router.post('/login', async (req, res)=>{
 		}
 		const token = await user.generateAuthToken() ;
 		res.cookie('jwt', token) ;
-		res.redirect('/ebay') ;
+		res.redirect('/') ;
 	}) ;
 });
 
