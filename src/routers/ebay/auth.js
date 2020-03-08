@@ -15,7 +15,7 @@ router.get('/ebay', passport.authenticate('cookie', {}), (req, res)=>{
 	}).catch((error) => {
 		console.log(`Error to get Access token :${JSON.stringify(error)}`);
 	});*/
-
+	console.log(process.env.env)
 	// Authorization Code Auth Flow
 	const consentUrl = ebayAuthToken.generateUserAuthorizationUrl(process.env.env, scopes); // get user consent url.
 	// Using user consent url, you will be able to generate the code

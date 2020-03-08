@@ -2,6 +2,7 @@ const auth_router = require('./routers/auth') ;
 const item_router = require('./routers/items') ;
 const main_router = require('./routers/main') ;
 const ebayAuth_router = require('./routers/ebay/auth');
+const matching_router = require('./routers/matching');
 var bodyParser = require('body-parser') ;
 const passport = require('./passport') ;
 const cookieParser = require('cookie-parser') ;
@@ -34,6 +35,7 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' })) ;
 // parses cookies and gives an object req.cookies
 app.use(cookieParser()) ;
 
+app.use(matching_router);
 app.use(ebayAuth_router);
 app.use(auth_router) ;
 app.use(item_router) ;

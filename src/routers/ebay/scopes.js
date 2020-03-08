@@ -8,7 +8,6 @@ const scopes = [
     'https://api.ebay.com/oauth/api_scope/sell.account',
     'https://api.ebay.com/oauth/api_scope/sell.fulfillment.readonly',
     'https://api.ebay.com/oauth/api_scope/sell.fulfillment',
-	'https://api.ebay.com/oauth/api_scope/buy.shopping.cart'
 ];
 
 module.exports = scopes;

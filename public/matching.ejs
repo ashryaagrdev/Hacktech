@@ -32,17 +32,17 @@
                                 <th>NAME</th>
                                 <th>PHONE</th>
                                 <th>ADDRESS</th>
-                                <th>PRICE</th>
+                                <th>Order Value</th>
                             </tr>
                         </thead>
                         <tbody>
                             <% matches.forEach((match, index)=>{%>
                             <tr>
                                 <td><%= index + 1 %></td>
-                                <td>match.name</td>
-                                <td>match.phone</td>
-                                <td>match.address</td>
-                                <td>match.price</td>
+                                <td><%=match.name%></td>
+                                <td><%=match.phone%></td>
+                                <td><%=match.price%></td>
+                                <td><%=match.address%></td>
                             </tr>
                             <% }) ;%>
                         </tbody>

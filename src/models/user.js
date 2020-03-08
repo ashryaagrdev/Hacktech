@@ -73,8 +73,11 @@ userSchema.virtual('items', {
 	foreignField: 'owner'
 });
 
+const getLocation = ()=>[Math.random(), Math.random()];// Mocking the fetching proocess of location for user
+
 userSchema.pre('save', async function (next) {
 	const user = this ;
+	if(!user.location) user.location = getLocation();
 	validator.normalizeEmail(user.email, [ true, true, true, true, true, true, true, true,
 		true, true, true]) ;
 	if (user.isModified('password')) {
@@ -113,10 +116,6 @@ userSchema.methods.refreshAccessToken = async function(){
 	});
 };
 
-userSchema.methods.getPrice = async function(){
-	const user = this;
-
-};
 
 // Delete user items when user is removed
 userSchema.pre('remove', async function (next) {

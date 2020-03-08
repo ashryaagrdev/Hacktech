@@ -12,7 +12,7 @@
                         $target = $(target),
                         $rows = $target.find('tbody tr');
 
-                    if (search == '') {
+                    if (search === '') {
                         $rows.show();
                     } else {
                         $rows.each(function () {
@@ -40,7 +40,7 @@ $(function () {
             $panel = $this.parents('.panel');
 
         $panel.find('.panel-body').slideToggle();
-        if ($this.css('display') != 'none') {
+        if ($this.css('display') !== 'none') {
             $panel.find('.panel-body input').focus();
         }
     });
