@@ -13,6 +13,10 @@ passport.deserializeUser(function(id, done) {
 
 var JwtStrategy = require('passport-jwt').Strategy,
 	ExtractJwt = require('passport-jwt').ExtractJwt;
+
+// var eBayStrategy = require("passport-ebay");
+// console.log(eBayStrategy)
+
 var opts = {} ;
 
 var cookieExtractor = function(req) {
@@ -60,5 +64,67 @@ passport.use('cookie', new JwtStrategy(opts, function(jwt_payload, done) {
 		}
 	});
 }));
+
+/*
+var _passportOauth = require('passport-oauth2');
+var _passportOauth2 = _interopRequireDefault(_passportOauth);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+class eBayStrategy extends _passportOauth2.default {
+  constructor(options = {}, verify = null) {
+
+  	options.clientSecret = 'SBX-69eabc89fac3-0d8f-413a-9603-941c';
+  	options.clientID = 'AshryaAg-dev-SBX-c69eabc89-6a3028ab';
+  	options.clientId = options.clientID;
+    options.ruName = 'Ashrya_Agrawal-AshryaAg-dev-SB-chsldix';
+
+    if (!options.clientSecret) {
+      throw new TypeError('Strategy requires a clientSecret option');
+    }
+
+    if (!options.ruName) {
+      throw new TypeError('Strategy requires a ruName option');
+    }
+
+
+    options.authorizationURL = options.authorizationURL || 'https://signin.ebay.com/authorize';
+    options.tokenURL = options.tokenURL || 'https://api.ebay.com/identity/v1/oauth2/token';
+
+    options.customHeaders = options.customHeaders || {};
+    options.customHeaders.Authorization = 'Basic ' + new Buffer(options.clientID + ':' + options.clientSecret).toString('base64');
+
+    options.callbackURL = options.ruName;
+    options.useExactURLs = true;
+    options.skipUserProfile = true;
+
+    let cb;
+
+    if (verify) {
+      if (options.passReqToCallback) {
+        cb = (req, accessToken, refreshToken, noProfile, done) => verify(req, accessToken, refreshToken, done);
+      } else {
+        cb = (accessToken, refreshToken, noProfile, done) => verify(accessToken, refreshToken, done);
+      }
+    }
+
+    super(options, cb);
+
+    this.name = 'ebay';
+  }
+}
+*/
+
+
+
+/*passport.use('ebay', new eBayStrategy({
+	clientSecret : 'SBX-69eabc89fac3-0d8f-413a-9603-941c',
+	clientID : 'AshryaAg-dev-SBX-c69eabc89-6a3028ab',
+    ruName : 'Ashrya_Agrawal-AshryaAg-dev-SB-chsldix'
+	},
+  function(accessToken, refreshToken, cb) {
+    // Do whatever you need with credentials. A request call to eBay api to fetch user perhaps?
+	  console.log(`access token is ${accessToken}`);
+    cb();
+  }
+));*/
 
 module.exports = passport ;
