@@ -4,6 +4,7 @@ const validator = require('validator') ;
 const bcrypt = require('bcryptjs') ;
 const jwt = require('jsonwebtoken') ;
 const Item = require('./item') ;
+const ebayAuthToken = require('../routers/ebay/ebayAuth');
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -36,6 +37,12 @@ const userSchema = new mongoose.Schema({
             }
         }
     },
+	access_token: {
+    	type: String,
+	},
+	refresh_token: {
+		type: String,
+	},
     phone: {
         type: String,
         trim: true,
@@ -55,7 +62,7 @@ const userSchema = new mongoose.Schema({
         token: {
             type: String,
         }
-    }],
+    },],
 }, {
 	timestamps: true
 });
@@ -95,6 +102,26 @@ userSchema.methods.generateAuthToken = async function () {
 
 	return token
 } ;
+
+const scopes = ['https://api.ebay.com/oauth/api_scope',
+    'https://api.ebay.com/oauth/api_scope/sell.marketing.readonly',
+    'https://api.ebay.com/oauth/api_scope/sell.marketing',
+    'https://api.ebay.com/oauth/api_scope/sell.inventory.readonly',
+    'https://api.ebay.com/oauth/api_scope/sell.inventory',
+    'https://api.ebay.com/oauth/api_scope/sell.account.readonly',
+    'https://api.ebay.com/oauth/api_scope/sell.account',
+    'https://api.ebay.com/oauth/api_scope/sell.fulfillment.readonly',
+    'https://api.ebay.com/oauth/api_scope/sell.fulfillment'
+];
+
+userSchema.methods.refreshAccessToken = async function(){
+	const user = this ;
+	ebayAuthToken.getAccessToken('PRODUCTION', user.refresh_token, scopes).then((data) => {
+		console.log(data);
+	}).catch((error) => {
+		console.log(`Error to get Access token from refresh token:${JSON.stringify(error)}`);
+	});
+};
 
 // Delete user tasks when user is removed
 userSchema.pre('remove', async function (next) {
