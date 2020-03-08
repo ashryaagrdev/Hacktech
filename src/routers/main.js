@@ -19,6 +19,13 @@ router.get('/register', (req, res)=>{
 	res.render('register') ;
 }) ;
 
+router.get('/matching', (req, res)=>{
+	matches = []
+	res.render('matching', {
+		matches
+	}) ;
+}) ;
+
 router.post('', passport.authenticate('jwt', { session:false}), (req, res)=>{
 	res.send({ message : "<h1>Welcome to the backend service of my app :)</h1>" }) ;
 }) ;

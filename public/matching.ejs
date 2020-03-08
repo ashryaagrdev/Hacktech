@@ -1,0 +1,57 @@
+<html>
+
+<head>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="./css/matching.css" rel="stylesheet">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">MATCHES</h3>
+                        <div class="pull-right">
+                            <span class="clickable filter" data-toggle="tooltip" title="Toggle table filter"
+                                data-container="body">
+                                <i class="glyphicon glyphicon-filter"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <input type="text" class="form-control" id="dev-table-filter" data-action="filter"
+                            data-filters="#dev-table" placeholder="Filter Matches" />
+                    </div>
+                    <table class="table table-hover" id="dev-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>NAME</th>
+                                <th>PHONE</th>
+                                <th>ADDRESS</th>
+                                <th>PRICE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% matches.forEach((match, index)=>{%>
+                            <tr>
+                                <td><%= index + 1 %></td>
+                                <td>match.name</td>
+                                <td>match.phone</td>
+                                <td>match.address</td>
+                                <td>match.price</td>
+                            </tr>
+                            <% }) ;%>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./js/matching.js"></script>
+</body>
+
+</html>
