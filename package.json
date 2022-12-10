@@ -23,7 +23,7 @@
     "cookie-parser": "^1.4.4",
     "ebay-oauth-nodejs-client": "^1.1.0",
     "ejs": "^3.0.1",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "express-session": "^1.16.1",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.2.3",
